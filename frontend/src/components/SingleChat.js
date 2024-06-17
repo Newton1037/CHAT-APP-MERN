@@ -7,18 +7,25 @@ import ProfileModal from './miscellaneous/ProfileModal';
 import UpdateGroupChatModal from './miscellaneous/UpdateGroupChatModal';
 import { LuSendHorizonal } from "react-icons/lu";
 import axios from 'axios';
+import io from "socket.io-client"
 import ScrollChat from './ScrollChat';
+
+const END_POINT = "http://localhost:5000"
+var socket , selectedChatCompare
 
 const SingleChat = ({ fetchAgain , setFetchAgain }) => {
 
-  const [message , setMessage] = useState()
-  const [NewMessage , setNewMessage] = useState([])
+  const [message , setMessage] = useState([])
+  const [NewMessage , setNewMessage] = useState("")
   const [loading , setLoading] = useState(false)
+  const [socketConnected , setSocketConnected] = useState(false) 
   
   const toast = useToast()
   const { user , selectedChat , setSelectedChat } = ChatState()
 
-  const sendMessages = async () => {
+  const sendMessages = async (e) => {
+    e.preventDefault()
+
     if(NewMessage){
      try {
       const config = {
@@ -33,7 +40,8 @@ const SingleChat = ({ fetchAgain , setFetchAgain }) => {
         content: NewMessage ,
         chatId: selectedChat._id
       } , config)
-
+      
+      socket.emit("New Message" , data)
       setMessage([...message , data])      
      } catch (error) {
          toast({
@@ -63,6 +71,7 @@ const SingleChat = ({ fetchAgain , setFetchAgain }) => {
 
       setMessage(data)
       setLoading(false)
+      socket.emit("chat connect" , selectedChat._id)
     } catch (error) {
         toast({
           title: "Error Occured!",
@@ -76,8 +85,27 @@ const SingleChat = ({ fetchAgain , setFetchAgain }) => {
   }
 
   useEffect(() => {
+    socket = io(END_POINT)
+    socket.emit("setup", user)
+    socket.on("connected", () => setSocketConnected(true))
+  },[])
+
+  useEffect(() => {
     fetchMessages()
+    selectedChatCompare = selectedChat
   },[selectedChat])
+
+  useEffect(() => {
+    socket.on("message received" , (NewMessageReceived) => {
+      if(!selectedChatCompare || selectedChatCompare._id !== NewMessageReceived.chat._id){
+        // notification
+      }else{
+        setMessage([...message, NewMessageReceived])
+      }
+    })
+  })
+
+  
 
   const typingHandler = (e) => {
      setNewMessage(e.target.value)
@@ -159,25 +187,32 @@ const SingleChat = ({ fetchAgain , setFetchAgain }) => {
               </div>
             )
           }
-          <FormControl display="flex" mt="3" alignItems="center">
-            <Input 
-              p="5"
-              mx="2"
-              w="100%"
-              bg="white"
-              variant="filled"
-              value={NewMessage}
-              placeholder="Enter your message here"
-              onChange={typingHandler}
-            />
-            <Button 
-              p="3"
-              colorScheme="teal"
-              onClick={sendMessages}
-            >  
-              <LuSendHorizonal style={{fontSize: "20px"}}/>
-            </Button>
-          </FormControl>
+          <form onSubmit={sendMessages} >
+            <FormControl display="flex" mt="3" alignItems="center">
+              <Input 
+                p="5"
+                mx="2"
+                w="100%"
+                bg="white"
+                variant="filled"
+                value={NewMessage}
+                placeholder="Enter your message here"
+                onChange={typingHandler}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !e.shiftKey) {
+                    sendMessages(e);
+                  }
+                }} 
+              />
+              <Button 
+                p="3"
+                colorScheme="teal"
+                onClick={sendMessages}
+              >  
+                <LuSendHorizonal style={{fontSize: "20px"}}/>
+              </Button>
+            </FormControl>
+          </form>
         </Box>
        </>
      ) : (

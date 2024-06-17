@@ -107,15 +107,14 @@ const SideBar = () => {
           <Tooltip label="Search users to chat" hasArrow placement="bottom-end">
             <Button variant="ghost" onClick={onOpen}>
               <IoSearch style={{fontSize: "25px"}}/>
-              <Text d={{base: "none", md: "flex"}} px="4">Search User</Text>
+              <Text display={{base: "none", md: "flex"}} px="4" fontSize="18px">Search User</Text>
             </Button>
           </Tooltip>        
 
-          <Text fontSize="2xl" fontFamily="Work Sans">Chit-Chat</Text>
-          <div>
+          <Text fontSize="2xl" fontFamily="Work Sans" fontWeight="bold">Chit-Chat</Text>
+          <div style={{display: "flex", alignItems: "center"}}>
             <Menu>
                 <MenuButton p="1"><TbBellFilled style={{fontSize: "22px"}} /></MenuButton>
-                {/* <MenuList></MenuList> */}
             </Menu>
             <Menu>
                <MenuButton as={Button} rightIcon={<FaAngleDown />}>

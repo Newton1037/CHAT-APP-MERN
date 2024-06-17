@@ -59,14 +59,15 @@ const ChatLog = ({ fetchAgain }) => {
         px="3"
         pb="3"
         w="100%"
-        fontSize={{base: "28px", md: "30px"}}
+        fontSize={{base: "25px", md: "30px"}}
+        fontWeight="bold"
         fontFamily="Work Sans"
       >
          My Chats
          <GroupChatModal>
            <Button 
              display="flex"
-             fontSize={{base: "17px", md: "10px", lg: "17px"}}
+             fontSize={{base: "17px", md: "10px", lg: "18px"}}
              rightIcon={<FaPlus />}
            >
              New Group Chat
