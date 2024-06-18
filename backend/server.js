@@ -15,6 +15,8 @@ connectDB()
 
 app.use(express.json())  // to accept json data
 
+const __dirname1 = path.resolve();
+
 if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname1, "/frontend/build")));
   
