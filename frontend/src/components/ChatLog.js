@@ -86,9 +86,9 @@ const ChatLog = ({ fetchAgain }) => {
         borderWidth="1px"
         overflowY="hidden"
       >
-        {chats ? (
-          <Stack overflowY="scroll">
-            {chats.map((chat) => (
+            {Array.isArray(chats) && chats.length > 0 ? (          
+              <Stack overflowY="scroll">
+              {chats.map((chat) => (
                <Box 
                  onClick={() => setSelectedChat(chat)}
                  bg={selectedChat === chat ? "teal" : "#E8E8E8"}
