@@ -9,14 +9,16 @@ import ProfileModal from './ProfileModal';
 import { useNavigate } from 'react-router-dom';
 import ChatLoading from '../ChatLoading';
 import UserListItem from '../UserCard/UserListItem';
+import { getSender } from '../../config/ChatNameFunction';
+import NotificationBadge, { Effect } from "react-notification-badge"
 
 const SideBar = () => {
     const [search, setSearch] = useState("")
     const [searchResult, setSearchresult] = useState([])
     const [loading, setLoading] = useState(false)
-    const [loadingChats, setLoadingChats] = useState()
+    const [loadingChats, setLoadingChats] = useState(false)
 
-    const {user , setSelectedChat , chats , setChats} = ChatState()
+    const {user , setSelectedChat , chats , setChats , notification , setNotification } = ChatState()
     const navigate = useNavigate()
     const toast = useToast();
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -114,7 +116,35 @@ const SideBar = () => {
           <Text fontSize="2xl" fontFamily="Work Sans" fontWeight="bold">Chit-Chat</Text>
           <div style={{display: "flex", alignItems: "center"}}>
             <Menu>
-                <MenuButton p="1"><TbBellFilled style={{fontSize: "22px"}} /></MenuButton>
+                <MenuButton p="1">
+                  <NotificationBadge 
+                    count={notification.length}
+                    effect={Effect.SCALE}
+                  />
+                   <TbBellFilled style={{fontSize: "28px"}}  />
+                </MenuButton>
+                <MenuList pl={2}>
+                  {Array.isArray(notification) && notification.length === 0 && "No new messages"}
+                  {Array.isArray(notification) &&
+                    notification.map((notif) => (
+                      <MenuItem
+                        fontWeight="bold"
+                        color="#0047ab"
+                        key={notif._id}
+                        onClick={() => {
+                          setSelectedChat(notif.chat);
+                          setNotification(notification.filter((n) => n !== notif));
+                        }}
+                      >
+                          {notif.chat.isGroupChat
+                            ? `Message in ${notif.chat.chatName}`
+                            : `Message from ${getSender(user, notif.chat.users)}`}
+                      </MenuItem>
+                    ))}
+                </MenuList>
+
+            </Menu>
+            <Menu>
             </Menu>
             <Menu>
                <MenuButton as={Button} rightIcon={<FaAngleDown />}>
