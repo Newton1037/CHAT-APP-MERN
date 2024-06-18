@@ -48,7 +48,7 @@ const SideBar = () => {
             Authorization: `Bearer ${user.token}`
           },
         }
-        const { data } = await axios.get(`/api/user?search=${search}`, config)
+       const { data } = await axios.get(`https://chat-app-mern-oomt.onrender.com/api/user?search=${search}`, config)
 
         setLoading(false)
         setSearchresult(data)
@@ -76,7 +76,7 @@ const SideBar = () => {
           },
         }
         
-        const { data } = await axios.post("/api/chat" , { userId } , config)
+        const { data } = await axios.post("https://chat-app-mern-oomt.onrender.com/api/chat" , { userId } , config)
 
         if(!chats.find((c) => c._id === data._id)) setChats([data , ...chats])
         setSelectedChat(data)

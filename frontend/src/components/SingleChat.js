@@ -12,7 +12,7 @@ import ScrollChat from './ScrollChat';
 import Lottie from "react-lottie"
 import animationData from "../animations/typing.json"
 
-const END_POINT = "https://chat-app-mern-oomt.onrender.com/"
+const END_POINT = "https://chat-app-mern-oomt.onrender.com"
 var socket , selectedChatCompare
 
 const SingleChat = ({ fetchAgain , setFetchAgain }) => {
@@ -49,7 +49,7 @@ const SingleChat = ({ fetchAgain , setFetchAgain }) => {
       }
       
       setNewMessage("")
-      const { data } = await axios.post("/api/message" , {
+      const { data } = await axios.post("https://chat-app-mern-oomt.onrender.com/api/message" , {
         content: NewMessage ,
         chatId: selectedChat._id
       } , config)
@@ -80,7 +80,7 @@ const SingleChat = ({ fetchAgain , setFetchAgain }) => {
         },
       }
 
-      const { data } = await axios.get(`/api/message/${selectedChat._id}` , config)  
+      const { data } = await axios.get(`https://chat-app-mern-oomt.onrender.com/api/message/${selectedChat._id}` , config)  
 
       setMessage(data)
       setLoading(false)

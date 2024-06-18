@@ -6,7 +6,7 @@ import { isLastMessage, isSameSender, isSameSenderMargin, isSameUser } from '../
 
 const ScrollChat = ({ message }) => {
 
-    const { user } = ChatState()
+  const { user } = ChatState()
 
   return (
     <ScrollableFeed>
