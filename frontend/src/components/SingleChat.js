@@ -12,7 +12,7 @@ import ScrollChat from './ScrollChat';
 import Lottie from "react-lottie"
 import animationData from "../animations/typing.json"
 
-const END_POINT = "https://chat-app-mern-smia.onrender.com"
+const END_POINT = "http://localhost:5000"
 var socket , selectedChatCompare
 
 const SingleChat = ({ fetchAgain , setFetchAgain }) => {
