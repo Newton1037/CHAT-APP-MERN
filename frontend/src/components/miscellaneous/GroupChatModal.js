@@ -157,23 +157,44 @@ const GroupChatModal = ({ children }) => {
                   flexWrap="wrap"
                   w="100%"
                 >
-                  {selectedUsers.map((u) => (
+                {Array.isArray(selectedUsers) ? (
+                  selectedUsers.map((u) => (
                       <UserPinItem 
                          key={u._id}
                          user={u}
                          handleFunction={() => handleDelete(u)}
                       />
-                  ))}
+                  ))) : (
+                    toast({
+                    title: "No such users",
+                    status: "warning",
+                    duration: 5000,
+                    isClosable: true,
+                    position: "bottom",
+                    colorScheme: "red"
+                  })
+                 )
+                }
                 </Box>
 
                 {loading ? <Spinner ml="auto" display="flex" /> : (
-                    searchResult?.slice(0,4).map((user) => (
+                    Array.isArray(searchResult) ? (
+                      searchResult.slice(0, 4).map((user) => (
                         <UserListItem 
-                           key={user._id}
-                           user={user}
-                           handleFunction={() => handleGroup(user)}
+                          key={user._id}
+                          user={user}
+                          handleFunction={() => handleGroup(user)}
                         />
-                    ))
+                      ))
+                    ) : (
+                      toast({
+                        title: "No such users",
+                        status: "warning",
+                        duration: 5000,
+                        isClosable: true,
+                        position: "bottom",
+                        colorScheme: "red"
+                      })                    )                   
                 )}
             </ModalBody>
   

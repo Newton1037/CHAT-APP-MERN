@@ -206,13 +206,24 @@ const UpdateGroupChatModal = ({ fetchAgain , setFetchAgain , fetchMessages }) =>
                   w="100%"
                   pb="3"
                 >
-                    {selectedChat.users.map((u) => (
-                       <UserPinItem 
-                         key={u._id}
-                         user={u}
-                         handleFunction={() => handleKick(u)}
-                       />
-                    ))}
+                    {selectedChat && Array.isArray(selectedChat.users) ? (
+                      selectedChat.users.map((u) => (
+                        <UserPinItem 
+                          key={u._id}
+                          user={u}
+                          handleFunction={() => handleKick(u)}
+                        />
+                      ))
+                    ) : (
+                      toast({
+                        title: "No such users",
+                        status: "warning",
+                        duration: 5000,
+                        isClosable: true,
+                        position: "bottom",
+                        colorScheme: "red"
+                      })                      )}
+
                 </Box>
                 <FormControl display="flex" >
                     <Input 
@@ -241,16 +252,26 @@ const UpdateGroupChatModal = ({ fetchAgain , setFetchAgain , fetchMessages }) =>
                     />
                 </FormControl>
                 {loading ? <Spinner ml="auto" display="flex" /> : (
-                    searchResult?.slice(0,4).map((user) => (
+                    Array.isArray(searchResult) ? (
+                      searchResult.slice(0, 4).map((user) => (
                         <UserListItem 
-                           key={user._id}
-                           user={user}
-                           handleFunction={() => handleAddUser(user)}
+                          key={user._id}
+                          user={user}
+                          handleFunction={() => handleAddUser(user)}
                         />
+                      ))
+                    ) : (
+                      toast({
+                        title: "No such users",
+                        status: "warning",
+                        duration: 5000,
+                        isClosable: true,
+                        position: "bottom",
+                        colorScheme: "red"
+                      })                      
                     ))
-                )}
+                }
             </ModalBody>
-  
             <ModalFooter>
               <Button colorScheme='red' mr={3} onClick={() => handleKick(user)}>
                 Exit Group <BiExit style={{ fontSize: "20px"}}/>

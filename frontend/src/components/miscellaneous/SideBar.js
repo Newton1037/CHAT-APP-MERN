@@ -188,15 +188,14 @@ const SideBar = () => {
               <Button colorScheme="blue" onClick={handleSearch}>Go</Button>
             </Box>
             {loading ? <ChatLoading /> : (
-              searchResult?.map((user) => (
-                <UserListItem 
-                  key={user._id}
-                  user={user}
-                  handleFunction={() => accessChats(user._id)}
-                />
-              ))
-             )
-            }
+                Array.isArray(searchResult) && searchResult.map((user) => (
+                  <UserListItem 
+                    key={user._id}
+                    user={user}
+                    handleFunction={() => accessChats(user._id)}
+                  />
+                ))
+              )}
             {loadingChats && <Spinner ml="auto" display="flex" />}
           </DrawerBody>
         </DrawerContent>
