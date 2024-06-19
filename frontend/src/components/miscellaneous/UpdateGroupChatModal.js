@@ -29,7 +29,8 @@ const UpdateGroupChatModal = ({ fetchAgain , setFetchAgain , fetchMessages }) =>
         setLoading(true)
         const config = {
             headers : {
-              Authorization: `Bearer ${user.token}`
+              Authorization: `Bearer ${user.token}`,
+              "Content-type": "application/json",
             },
          }
   
@@ -56,7 +57,8 @@ const UpdateGroupChatModal = ({ fetchAgain , setFetchAgain , fetchMessages }) =>
         setRenameLoading(true)
         const config = {
             headers : {
-              Authorization: `Bearer ${user.token}`
+              Authorization: `Bearer ${user.token}`,
+              "Content-type": "application/json",
             },
          }
 
@@ -101,7 +103,8 @@ const UpdateGroupChatModal = ({ fetchAgain , setFetchAgain , fetchMessages }) =>
          setLoading(true)
          const config = {
              headers : {
-               Authorization: `Bearer ${user.token}`
+               Authorization: `Bearer ${user.token}`,
+               "Content-type": "application/json",
              },
           }
  
@@ -157,7 +160,8 @@ const UpdateGroupChatModal = ({ fetchAgain , setFetchAgain , fetchMessages }) =>
          setLoading(true)
          const config = {
              headers : {
-               Authorization: `Bearer ${user.token}`
+               Authorization: `Bearer ${user.token}`,
+               "Content-type": "application/json",
              },
           }
  

@@ -76,7 +76,8 @@ const SingleChat = ({ fetchAgain , setFetchAgain }) => {
       setLoading(true)
       const config = {
         headers: {
-          Authorization: `Bearer ${user.token}`
+          Authorization: `Bearer ${user.token}`,
+          "Content-type": "application/json",
         },
       }
 

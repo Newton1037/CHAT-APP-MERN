@@ -45,7 +45,8 @@ const SideBar = () => {
         setLoading(true)
         const config = {
           headers: {
-            Authorization: `Bearer ${user.token}`
+            Authorization: `Bearer ${user.token}`,
+            "Content-type" : "application/json",
           },
         }
        const { data } = await axios.get(`https://chat-app-mern-oomt.onrender.com/api/user?search=${search}`, config)

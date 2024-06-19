@@ -26,7 +26,7 @@ const accessChats = asyncHandler(async (req, res) => {
   });
 
   if (isChat.length > 0) {
-    res.send(isChat[0]);
+    res.json(isChat[0]);
   } else {
     var ChatData = {
       isGroupChat: false,
@@ -61,7 +61,7 @@ const fetchChats = asyncHandler(async (req, res) => {
           select: "name pic email",
         });
 
-        res.status(200).send(results);
+        res.status(200).json(results);
       });
   } catch (error) {
     res.status(400);
@@ -71,7 +71,7 @@ const fetchChats = asyncHandler(async (req, res) => {
 
 const createGroupChat = asyncHandler(async (req, res) => {
   if (!req.body.name || !req.body.users) {
-    return res.status(400).send({ message: "Please fill all the fields" });
+    return res.status(400).json({ message: "Please fill all the fields" });
   }
 
   let users = JSON.parse(req.body.users);
@@ -79,7 +79,7 @@ const createGroupChat = asyncHandler(async (req, res) => {
   if (users.length < 2) {
     return res
       .status(400)
-      .send({ message: "More than 2 users are required to form a group chat" });
+      .json({ message: "More than 2 users are required to form a group chat" });
   }
 
   users.push(req.user);

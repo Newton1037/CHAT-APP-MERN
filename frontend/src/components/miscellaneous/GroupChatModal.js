@@ -28,7 +28,8 @@ const GroupChatModal = ({ children }) => {
         setLoading(true)
         const config = {
             headers : {
-              Authorization: `Bearer ${user.token}`
+              Authorization: `Bearer ${user.token}`,
+              "Content-type": "application/json",
             },
          }
   
@@ -84,7 +85,8 @@ const GroupChatModal = ({ children }) => {
         try {
             const config = {
                 headers : {
-                  Authorization: `Bearer ${user.token}`
+                  Authorization: `Bearer ${user.token}`,
+                  "Content-type": "application/json",
                 },
              }
 
