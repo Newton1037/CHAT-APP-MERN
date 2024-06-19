@@ -4,6 +4,7 @@ const connectDB = require("./config/db")
 const dotenv = require("dotenv")
 const colors = require("colors")
 const path = require("path")
+const cors = require("cors")
 const userRoutes = require("./routes/userRoutes")
 const chatRoutes = require("./routes/chatRoutes")
 const messageRoutes = require("./routes/messageRoutes")
@@ -13,7 +14,8 @@ const app = express()
 dotenv.config()
 connectDB()
 
-app.use(express.json())  // to accept json data
+app.use(express.json()) 
+app.use(cors())
 
 const __dirname1 = path.resolve();
 
@@ -43,7 +45,7 @@ const server = app.listen(`${PORT}` , console.log(`Server started on port ${PORT
 const io = require("socket.io")(server , {
     pingTimeout: 60000,
     cors: {
-        origin: "http://localhost:3000",
+        origin: "https://chat-app-mern-oomt.onrender.com",
     },  
 })
 
