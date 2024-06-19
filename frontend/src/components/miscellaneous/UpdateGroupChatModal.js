@@ -29,11 +29,12 @@ const UpdateGroupChatModal = ({ fetchAgain , setFetchAgain , fetchMessages }) =>
         setLoading(true)
         const config = {
             headers : {
-              Authorization: `Bearer ${user.token}`
+              Authorization: `Bearer ${user.token}`,
+              "Content-type": "application/json",
             },
          }
   
-         const { data } = await axios.get(`https://chat-app-mern-oomt.onrender.com/api/user?search=${search}` , config)
+         const { data } = await axios.get(`/api/user?search=${search}` , config)
          setLoading(false)
          setSearchResult(data)   
        } catch (error) {
@@ -56,11 +57,12 @@ const UpdateGroupChatModal = ({ fetchAgain , setFetchAgain , fetchMessages }) =>
         setRenameLoading(true)
         const config = {
             headers : {
-              Authorization: `Bearer ${user.token}`
+              Authorization: `Bearer ${user.token}`,
+              "Content-type": "application/json",
             },
          }
 
-        const { data } = await axios.put("https://chat-app-mern-oomt.onrender.com/api/chat/grouprename" , {
+        const { data } = await axios.put("/api/chat/grouprename" , {
             chatId: selectedChat._id ,
             chatName: Groupchatname
          } , config)
@@ -101,11 +103,12 @@ const UpdateGroupChatModal = ({ fetchAgain , setFetchAgain , fetchMessages }) =>
          setLoading(true)
          const config = {
              headers : {
-               Authorization: `Bearer ${user.token}`
+               Authorization: `Bearer ${user.token}`,
+               "Content-type": "application/json",
              },
           }
  
-         const { data } = await axios.put("https://chat-app-mern-oomt.onrender.com/api/chat/groupremove" , {
+         const { data } = await axios.put("/api/chat/groupremove" , {
              chatId: selectedChat._id ,
              userId: UserToKick._id
           } , config)
@@ -157,11 +160,12 @@ const UpdateGroupChatModal = ({ fetchAgain , setFetchAgain , fetchMessages }) =>
          setLoading(true)
          const config = {
              headers : {
-               Authorization: `Bearer ${user.token}`
+               Authorization: `Bearer ${user.token}`,
+               "Content-type": "application/json",
              },
           }
  
-         const { data } = await axios.put("https://chat-app-mern-oomt.onrender.com/api/chat/groupadd" , {
+         const { data } = await axios.put("/api/chat/groupadd" , {
              chatId: selectedChat._id ,
              userId: NewUser._id
           } , config)

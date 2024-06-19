@@ -50,7 +50,7 @@ const Signup = () => {
        }
 
        const { data } = await axios.post(
-         "https://chat-app-mern-oomt.onrender.com/api/user",
+         "/api/user",
          { name, email, password, pic },
          config
        )

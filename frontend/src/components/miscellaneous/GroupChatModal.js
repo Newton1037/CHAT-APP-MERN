@@ -28,11 +28,12 @@ const GroupChatModal = ({ children }) => {
         setLoading(true)
         const config = {
             headers : {
-              Authorization: `Bearer ${user.token}`
+              Authorization: `Bearer ${user.token}`,
+              "Content-type": "application/json",
             },
          }
   
-         const { data } = await axios.get(`https://chat-app-mern-oomt.onrender.com/api/user?search=${search}` , config)
+         const { data } = await axios.get(`/api/user?search=${search}` , config)
          setLoading(false)
          setSearchResult(data)   
        } catch (error) {
@@ -84,11 +85,12 @@ const GroupChatModal = ({ children }) => {
         try {
             const config = {
                 headers : {
-                  Authorization: `Bearer ${user.token}`
+                  Authorization: `Bearer ${user.token}`,
+                  "Content-type": "application/json",
                 },
              }
 
-            const { data } = await axios.post(`https://chat-app-mern-oomt.onrender.com/api/chat/group` , 
+            const { data } = await axios.post(`/api/chat/group` , 
                 {
                  name: Groupchatname ,
                  users: JSON.stringify(selectedUsers.map((u) => u._id))
