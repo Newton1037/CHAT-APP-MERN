@@ -20,7 +20,7 @@ const Login = () => {
       toast({
         title: "Please enter all the fields",
         status: "warning",
-        duration: 5000,
+        duration: 8000,
         isClosable: true,
         position: "bottom"
       })
@@ -45,7 +45,7 @@ const Login = () => {
        toast({
         title: "Login Successful",
         status: "success",
-        duration: 5000,
+        duration: 8000,
         isClosable: true,
         position: "bottom"
       })
@@ -59,7 +59,7 @@ const Login = () => {
       toast({
         title: "Please enter correct email or password",
         status: "error",
-        duration: 5000,
+        duration: 8000,
         isClosable: true,
         position: "bottom"
       })

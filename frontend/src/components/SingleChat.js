@@ -12,7 +12,7 @@ import ScrollChat from './ScrollChat';
 import Lottie from "react-lottie"
 import animationData from "../animations/typing.json"
 
-const END_POINT = "http://localhost:5000"
+const END_POINT = "http://localhost:8000"
 var socket , selectedChatCompare
 
 const SingleChat = ({ fetchAgain , setFetchAgain }) => {
@@ -61,7 +61,7 @@ const SingleChat = ({ fetchAgain , setFetchAgain }) => {
            title: "Error Occured!",
            description: "Failed to send the Message",
            status: "error",
-           duration: 5000,
+           duration: 8000,
            isClosable: true,
            position: "bottom",
          });
@@ -91,7 +91,7 @@ const SingleChat = ({ fetchAgain , setFetchAgain }) => {
           title: "Error Occured!",
           description: "Failed to fetch the Message",
           status: "error",
-          duration: 5000,
+          duration: 8000,
           isClosable: true,
           position: "bottom",
         });

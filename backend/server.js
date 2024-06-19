@@ -4,6 +4,7 @@ const connectDB = require("./config/db")
 const dotenv = require("dotenv")
 const colors = require("colors")
 const path = require("path")
+const cors = require("cors")
 const userRoutes = require("./routes/userRoutes")
 const chatRoutes = require("./routes/chatRoutes")
 const messageRoutes = require("./routes/messageRoutes")
@@ -14,20 +15,21 @@ dotenv.config()
 connectDB()
 
 app.use(express.json())  // to accept json data
+app.use(cors())
 
-const __dirname1 = path.resolve();
+// const __dirname1 = path.resolve();
 
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join(__dirname1, "/frontend/build")));
+// if (process.env.NODE_ENV === "production") {
+//     app.use(express.static(path.join(__dirname1, "/frontend/build")));
   
-    app.get("*", (req, res) =>
-      res.sendFile(path.resolve(__dirname1, "frontend", "build", "index.html"))
-    );
-  } else {
-    app.get("/", (req, res) => {
-      res.send("API is running..");
-    });
-  }
+//     app.get("*", (req, res) =>
+//       res.sendFile(path.resolve(__dirname1, "frontend", "build", "index.html"))
+//     );
+//   } else {
+//     app.get("/", (req, res) => {
+//       res.send("API is running..");
+//     });
+//   }
 
 
 
@@ -38,7 +40,7 @@ app.use("/api/message", messageRoutes)
 app.use(notFound)
 app.use(errorHandler)
 
-PORT = process.env.PORT || 5000
+PORT = process.env.PORT || 8000
 
 const server = app.listen(`${PORT}` , console.log(`Server started on port ${PORT}`.yellow.bold))
 
