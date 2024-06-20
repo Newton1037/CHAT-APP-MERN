@@ -104,7 +104,7 @@ const SingleChat = ({ fetchAgain , setFetchAgain }) => {
     socket.on("connected", () => setSocketConnected(true))
     socket.on("typing" , () => setIstyping(true))
     socket.on("stop typing" , () => setIstyping(false))
-  },[])
+  },[user])
 
   useEffect(() => {
     fetchMessages()
